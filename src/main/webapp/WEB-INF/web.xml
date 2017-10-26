@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<display-name>adv</display-name>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	<session-config>
+		<session-timeout>1440</session-timeout>
+	</session-config>
+
+	<!-- spring管理session -->
+	<filter>
+		<filter-name>OpenSessionInView</filter-name>
+		<filter-class>org.springframework.orm.hibernate5.support.OpenSessionInViewFilter</filter-class>
+		<init-param>
+			<param-name>sessionFactory</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>OpenSessionInView</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Spring MVC配置 -->
+	<!-- ====================================== -->
+	<servlet>
+		<servlet-name>springMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- 可以自定义servlet.xml配置文件的位置和名称，默认为WEB-INF目录下，名称为[<servlet-name>]-servlet.xml，如spring-servlet.xml -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/springMVC-servlet.xml</param-value>
+		</init-param>
+
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- jsp页面登录过滤器 -->
+  	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>com.ls.filter.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+
+	<!-- 过滤 URL redirect重定向时的url带有的jsessionid -->
+	<filter>
+		<filter-name>jsessionid</filter-name>
+		<filter-class>com.ls.filter.RemoveUrlJsessionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>jsessionid</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+    <!-- 拦截器  拦截app请求 -->
+ <!--    <filter>
+        <filter-name>apprest</filter-name>
+        <filter-class>com.ls.filter.AppLoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+    	<filter-name>apprest</filter-name>
+		<url-pattern>*.do</url-pattern>
+    </filter-mapping> -->
+	<!-- SpringMVC DispatcherServlet处理的页面 -->
+	<servlet-mapping>
+		<servlet-name>springMVC</servlet-name>
+		<url-pattern>*.do</url-pattern>
+		<!-- 所有的的请求，都会被DispatcherServlet处理 -->
+		<!-- <url-pattern>/</url-pattern> -->
+	</servlet-mapping>
+
+	<!-- spring 核心配置 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring.xml</param-value>
+	</context-param>
+	
+    <!-- 解决HTTP PUT请求Spring无法获取请求参数的问题 -->
+    <filter>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+     <!--    <filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class> -->
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <servlet-name>springMVC</servlet-name>
+    </filter-mapping>
+
+
+	<!-- log4j2-begin -->
+	<listener>
+		<listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
+	</listener>
+	<filter>
+		<filter-name>log4jServletFilter</filter-name>
+		<filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>log4jServletFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+	<!-- log4j2-end -->
+
+
+	<!-- 错误页面 -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/pages/404.html</location>
+	</error-page>
+
+	
+
+</web-app>

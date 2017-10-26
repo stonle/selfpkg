@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Testing websockets</title>
+</head>
+<script type="text/javascript" src="pages/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="pages/static/h-ui.admin/js/bd-js.js"></script>
+<body>
+	<div>
+		<input type="submit" value="Start" onclick="start()" />
+	</div>
+	<div id="id_a"></div>
+	<div id="messages"></div>
+	<script type="text/javascript">
+
+		var webSocket = 
+			new WebSocket('ws://localhost:8080/selfpkg/appWebsocket/'+new Date().getTime());
+
+		webSocket.onerror = function(event) {
+			onError(event)
+		};
+
+		webSocket.onopen = function(event) {
+			onOpen(event);
+		};
+
+		webSocket.onmessage = function(event) {
+			onMessage(event)
+		};
+
+		function onMessage(event) {
+			document.getElementById('messages').innerHTML 
+				+= '<br />' + event.data;		    
+		}
+
+		function onOpen(event) {
+			document.getElementById('messages').innerHTML 
+				= 'Connection established';
+		}
+
+		function onError(event) {
+			alert(event.data);
+		}
+
+		function start() {
+			webSocket.send('hello');
+			return false;
+		}
+	</script>
+</body>
+</html>

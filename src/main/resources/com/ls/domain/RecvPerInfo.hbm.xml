@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- POJO 与 table 的映射关系配置 -->
+<hibernate-mapping >
+    <!-- 配置文件左边，代表 Java 类名，右边数据库表名 -->
+    <class name="com.ls.domain.RecvPerInfo"  dynamic-insert="true" dynamic-update="true"  table="cp_recv_per_info">
+        <!-- 声明主键列 -->
+        <id name="recvId" column = "recv_id">
+        	<generator class="assigned"></generator> 
+        </id>
+		<property name="recvName" column = "recv_name" />
+		<property name="recvAddr" column = "recv_addr" />
+		<property name="recvAddrFull" column = "recv_addr_full" />
+		<property name="recvPhone" column = "recv_phone" />
+	    <property name="memberId" column = "member_id" />
+		<property name="createDate"  column = "create_date" />
+		<property name="status" type="int" column = "status" />
+		<many-to-one name="city" column="city_id"></many-to-one>
+		<many-to-one name="province" column="pro_id"></many-to-one>
+		<many-to-one name="district" column="dis_id"></many-to-one>
+    </class>
+</hibernate-mapping>

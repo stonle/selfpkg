@@ -1,0 +1,22 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- POJO 与 table 的映射关系配置 -->
+<hibernate-mapping >
+    <!-- 配置文件左边，代表 Java 类名，右边数据库表名 -->
+    <class name="com.ls.domain.PkgCheckInfo" dynamic-insert="true" dynamic-update="true" table="pkg_check_info">
+        <!-- 声明主键列 -->
+        <id name="id" column = "id">
+        	<generator class="native"></generator> 
+        </id>
+        <property name="devNum" column = "devNum"/>
+        <property name="pkgNum" column = "pkgNum"/>
+	    <property name="status" type="int" column="status"/>
+	    <property name="type" type="int" column="type"/>
+	    <property name="checkUser" column="checkUser"/>
+	    <property name="ckeckUrl" column="ckeckUrl"/>
+	    <property name="createDate" column="createDate"/>
+	    <property name="checkDate" column="checkDate"/>
+    </class>
+</hibernate-mapping>

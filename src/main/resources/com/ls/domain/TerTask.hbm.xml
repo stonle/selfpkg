@@ -1,0 +1,27 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- POJO 与 table 的映射关系配置 -->
+<hibernate-mapping >
+    <!-- 配置文件左边，代表 Java 类名，右边数据库表名 -->
+    <class name="com.ls.domain.TerTaskInfo" dynamic-insert="true" dynamic-update="true" table="cp_ter_task">
+        <!-- 声明主键列 -->
+        <id name="id" column = "id">
+        	<generator class="native"></generator> 
+        </id>
+        <property name="deviceNum" column = "dev_num"/>
+        <property name="bVersion" column = "bversion"/>
+	    <property name="status" type="int" column="status"/>
+	    <property name="isSend" type="int" column="isSend"/>
+	    <property name="isResult" type="int" column="isResult"/>
+	    <property name="operType" type="int" column="operType"/>
+		<property name="configKey" column = "config_key"/>
+		<property name="configValue" column = "config_value"/>
+		<property name="configType" type="int" column = "config_type"/>
+		<property name="createUser" column = "create_user" />
+		<property name="createTime" column = "create_time" />
+		<property name="executeTime" column = "execute_time" />
+		<property name="remark" column = "remark" />
+    </class>
+</hibernate-mapping>

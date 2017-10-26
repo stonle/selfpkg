@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- POJO 与 table 的映射关系配置 -->
+<hibernate-mapping >
+    <!-- 配置文件左边，代表 Java 类名，右边数据库表名 -->
+    <class name="com.ls.domain.PackageInfo"  table="cp_package_info">
+        <!-- 自增主键-->
+        <id name="id" column = "id">
+        	<generator class="native"></generator> 
+        </id>
+        
+       <property name="height" column = "height" />
+       <property name="width" column = "width" />
+       <property name="length" column = "length" />
+       <property name="weight" column = "weight" />
+       <property name="paymentAmount" column = "payment_amount" />
+       <property name="backMany" column = "back_many" />
+       <property name="recvMany" column = "rec_many" />
+       <property name="payType" column = "pay_type" />
+       <property name="createDate" column = "createDate" />
+       <property name="status" column = "status" />
+       
+       <many-to-one name="orderInfo" column="pkg_num" unique="true"></many-to-one>
+       <many-to-one name="device" column="dev_num"></many-to-one>
+    </class>
+</hibernate-mapping>

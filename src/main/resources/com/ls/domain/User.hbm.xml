@@ -1,0 +1,26 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- POJO 与 table 的映射关系配置 -->
+<hibernate-mapping >
+    <!-- 配置文件左边，代表 Java 类名，右边数据库表名 -->
+    <class name="com.ls.domain.User" lazy="true" dynamic-insert="true" dynamic-update="true"  table="cp_user">
+        <!-- 声明主键列 -->
+        <id name="userID" column = "user_id">
+        	<generator class="assigned"></generator> 
+        </id>
+		<property name="loginName" column = "login_name" />
+		<property name="password" column = "password" />
+		<property name="userName" column = "username" />
+		<property name="cellphone" column = "cellphone" />
+
+		<property name="remark" column = "remark" />
+		<property name="createDate" column = "create_date" />
+		<property name="lastLoginDate" column = "last_login_date" />
+
+		<property name="userType" type="int" column = "user_type" />
+		<property name="status" type="int" column = "Status" />   
+		
+    </class>
+</hibernate-mapping>

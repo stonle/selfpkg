@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- POJO 与 table 的映射关系配置 -->
+<hibernate-mapping >
+    <!-- 配置文件左边，代表 Java 类名，右边数据库表名 -->
+    <class name="com.ls.domain.OrderInfo"  dynamic-insert="true" dynamic-update="true"  table="cp_pre_order_info">
+        <!-- 声明主键列 -->
+        <id name="pkgNum" column = "pkg_num">
+        	<generator class="assigned"></generator> 
+        </id>
+		<property name="sendCode" column = "send_code" />
+		<property name="pkgName" column = "pkg_name" />
+		
+		<property name="createTime" column = "create_time" />
+		
+	   <!--  <property name="memberId" column = "member_id" /> -->
+		<property name="type" type="int" column = "type" />
+		<property name="status" type="int" column = "status" />
+		<property name="payMent" type="int" column = "payment" />
+		<property name="codeDate"  column = "codeDate" />
+		<property name="payMentDate" column = "payMentDate" />
+		
+		<many-to-one name="memberInfo" column="member_id"></many-to-one>
+		<many-to-one name="sendPerInfo" column="send_id"></many-to-one>
+		<many-to-one name="recvPerInfo" column="recv_id"></many-to-one>
+    </class>
+</hibernate-mapping>

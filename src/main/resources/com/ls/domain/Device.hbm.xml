@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- POJO 与 table 的映射关系配置 -->
+<hibernate-mapping >
+    <!-- 配置文件左边，代表 Java 类名，右边数据库表名 -->
+    <class name="com.ls.domain.Device" lazy="true" dynamic-insert="true" dynamic-update="true"  table="cp_device">
+        <!-- 声明主键列 -->
+        <id name="devNum" column = "dev_num">
+        	<generator class="assigned"></generator> 
+        </id>
+        
+		<property name="devName" column = "dev_name" />
+		<property name="devAddr" column = "dev_address" />
+		<property name="cloudNum" column = "cloudNum" />
+		<property name="videoNum" column = "videoNum" />
+		<property name="createDate" column = "create_date" />
+		<property name="remark" column = "remark" />
+		<property name="status" column = "status" />
+		<property name="runDate" column = "run_date" />
+		
+		<many-to-one name="user" column="user_id"></many-to-one>
+		<many-to-one name="city" column="city_id"></many-to-one>
+		<many-to-one name="province" column="province_id"></many-to-one>
+		<many-to-one name="district" column="district_id"></many-to-one>
+		<many-to-one name="companyInfo" column="com_id"></many-to-one>
+	    <many-to-one name="courierInfo" column="cou_id"></many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- POJO 与 table 的映射关系配置 -->
+<hibernate-mapping >
+    <!-- 配置文件左边，代表 Java 类名，右边数据库表名 -->
+    <class name="com.ls.domain.City" table="cp_city">
+        <!-- 声明主键列 -->
+        <id name="cityID" column = "city_id">
+        	<generator class="native"></generator> 
+        </id>
+        
+        <property name="cityName" column = "city_name" />
+		<property name="zipCode" column = "zip_code" />
+        <many-to-one name="province" column="province_id" not-null="true"  update = "false"/>
+    </class>
+</hibernate-mapping>
